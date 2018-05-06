@@ -69,3 +69,14 @@ javascript提供了一个关键字：`debugger`，这个语句厉害了，可以
 </div>
 
 ## 编辑器中调试
+c++、Java、c#等语言都能在编辑器中进行调试、打断点，主要原因是它们都可以在编辑器中运行，而Web前端代码只能运行在浏览器中。
+
+#### webstorm
+webstorm可以在编辑器中进行调试、打断点，十分方便。但是，webstorm运行时占用资源比较多，对于性能比较低的电脑，webstorm运行的不是很流畅。
+webstorm的调试方法可以在官网中找到。
+
+#### Sublime Text
+Sublime Text是一个比较轻量的脚本编辑器，运行比较流畅，很多前端开发者都喜欢使用。
+Sublime Text有几个可以实现调试的Package，但是试用了一下，没有成功
+
+### Visual Studio Code
