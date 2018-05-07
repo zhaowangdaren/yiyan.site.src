@@ -80,3 +80,60 @@ Sublime Text是一个比较轻量的脚本编辑器，运行比较流畅，很�
 Sublime Text有几个可以实现调试的Package，但是试用了一下，没有成功
 
 ### Visual Studio Code
+Visual Studio Code具有Sublime Text轻量，同时也能实现调试，简直要抛弃Sublime Text投靠Visual Studio Code的怀抱了❤️
+
+#### 1、安装Debugger for Chrome插件
+安装最新版的Visual Studio Code后，打开它，点击左侧扩展图标
+<div style="text-align: center">
+  <img src="vscode-install-chrome-start.png">
+</div>
+
+在“在商店中搜索扩展”中输入“Debugger for Chrome”，安装Debugger for Chrome即可
+<div style="text-align: center">
+  <img src="vscode-install-chrome-end.png">
+</div>
+
+安装成功后，先新建文件夹test/src，在其中新建index.html和index.js两个文件
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div>o</div>
+  <script src="./index.js"></script>
+  <script>
+   var result = add(1, 2)
+   console.info('html', result)
+  </script>
+</body>
+</html>
+```
+index.js:
+
+```js
+function add(a, b) {
+  return a + b
+}
+
+var result = add(1, 2)
+console.info(result)
+```
+首先在index.js中打一个断点。点击图中红框区域即可添加断点，也可将鼠标放在红框区域右键添加、删除断点
+<div style="text-align: center">
+  <img src="add-break-point.png">
+</div>
+
+选中test文件夹，按快捷键F5，或者点击调试->启动调试，选择Chrome。Visual Studio Code会自动在test文件夹下创建`.vscode/launch.json`文件。修改`launch.json`文件，修改或增加途中红线标识的行。
+<div style="text-align: center">
+  <img src="launch.json.png">
+</div>
+
+然后再次按F5或启动调试，此时Chrome会自动打开index.html，刷新页面，即可发现Visual Studio Code在刚才我们添加的断点出阻塞了
+<div style="text-align: center">
+  <img src="vscode-debugger.png">
+</div>
