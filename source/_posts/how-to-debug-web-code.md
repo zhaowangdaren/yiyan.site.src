@@ -137,3 +137,39 @@ console.info(result)
 <div style="text-align: center">
   <img src="vscode-debugger.png">
 </div>
+
+## 移动端网页调试
+移动端主要分Android和iOS，Windows Phone就暂时不考虑了，2017年销售的智能手机，99.9%的搭载了这两个操作系统。
+
+### Android端调试
+Android手机调试首先需要开启开发者模式，其次，如果是调试浏览器则需要安装Chrome浏览器，若是调试其他APP则需要APP开发者打开调试的开关。
+
+完成上述步骤后，打开网页，使用usb线链接电脑，允许电脑调试手机。在PC端Chrome浏览器地址栏输入`chrome://inspect`
+<div style="text-align: center">
+  <img src="chrome-inspect.png">
+</div>
+
+### iOS端调试网页
+macOS操作系统调试iOS网页比较简单，只需iPhone设置->Safari->高级->打开Web检查器开关，打开网页，iPhone通过数据线连接Mac电脑，打开Mac端Safari，点击开发->[你的手机]->选择调试的网页
+<div style="text-align: center">
+  <img src="safari-debug.png">
+</div>
+
+也可以使用iPhone模拟器调试，前提需要安装Xcode。上图正是模拟器调试。
+
+Windows操作系统要调试iOS端网页，则需要通过Chrome调试，并安装一些工具便可以调试Safari了
+
+## 最强大的调试方法
+使用浏览器自带的调试工具，可以说是最常用，也是最强大的调试方法。不仅可以调试自己开发的网页，也可以hack其他网页，从别人那里学习一些前端知识。
+
+Chrome浏览器的调试功能比较强大,其拥有很多功能，不仅可以查看、整理代码，还可以检查网页的性能、动画等等
+<div style="text-align: center">
+  <img src="chrome-debug-taobao.png">
+</div>
+
+Firefox浏览器调试功能也同样强大，完全媲美Chrome。最新版的Firefox在性能上有了很大的提升，渲染网页的速度赶超Chrome，资源占用却没有Chrome高。
+<div style="text-align: center">
+  <img src="chrome-debug-taobao.png">
+</div>
+
+国产浏览器中，如搜狗浏览器、UC浏览器等都支持调试，部分内核使用了Chromium，也就是Chrome内核，调试功能和Chrome差不多，可能有版本延迟，缺少部分新功能。
