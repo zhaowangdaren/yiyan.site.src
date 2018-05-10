@@ -2,6 +2,10 @@
 
 ## Usage
 
+### Start serve
+
+`hexo s`
+
 ### Create new page
 
 `hexo new [New Page Name]`
