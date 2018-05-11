@@ -3,7 +3,7 @@ title: Parcel打包初体验
 date: 2018-05-11 11:16:10
 tags: Parcel JavaScript
 ---
-<a href="https://parceljs.org/">`Parcel`</a>号称极速零配置Web应用打包工具，相比于webpack的复杂性，Parcel确实为我们省去了很多配置。使用过<a href="https://github.com/facebook/create-react-app">`facebook/create-react-app`</a>的同学应该会发现，`creat-react-app`也简化了配置，起包含`react-scripts`包，这个包做的事正与`Parcel`类似：将所有的打包配置统筹、封装
+<a href="https://parceljs.org/">`Parcel`</a>号称极速零配置Web应用打包工具，相比于webpack的复杂性，Parcel确实为我们省去了很多配置。使用过<a href="https://github.com/facebook/create-react-app">`facebook/create-react-app`</a>的同学应该会发现，`creat-react-app`也简化了配置，其包含`react-scripts`包，这个包做的事正与`Parcel`类似：将所有的打包配置统筹、封装。
 
 ## Parcel基本用法
 
@@ -70,7 +70,7 @@ emmmmm...
 <div style="text-align: center;">
   <img src="vue-runtime-error.png">
 </div>
-修改`main.js`和`router/index.js`文件中`vue`的引用
+由于我们在`App.vue`中使用了`template`函数，而`import Vue from 'vue'`默认引用的运行时态版（不支持template函数），所以需要改用vue完整版。vue修改`main.js`和`router/index.js`文件中`vue`的引用
 ```js
 import Vue from 'vue/dist/vue.esm.js'
 ```
