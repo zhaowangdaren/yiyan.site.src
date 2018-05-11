@@ -62,7 +62,7 @@ emmmmm...
 <div style="text-align: center;">
   <img src="bright-emoji.png"/>
 </div>
-好想没有将`main.js`引入html文件。改！
+好像没有将`main.js`引入html文件。改！
 <div style="text-align: center;">
   <img src="error-path.png"/>
 </div>
