@@ -7,7 +7,7 @@ title: 少盐
 subtitle:
 description:
 author: 少盐
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -72,7 +72,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: Tranquilpeak
+theme: hueman
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -80,3 +80,4 @@ deploy:
   type: git
   repo: https://github.com/zhaowangdaren/blog.yiyan.site.git
   branch: master
+  
