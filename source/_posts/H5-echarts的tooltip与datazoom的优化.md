@@ -2,13 +2,15 @@
 title: 'H5:echarts的tooltip与datazoom的优化'
 date: 2018-05-25 13:06:37
 tags: chart
+thumbnail: 'h5-echarts-kchart.png'
 ---
 > echarts版本3.X.X
 <div style="text-align: center">
-  <img src="h5-echarts-kchart.png">
+  <amp-img src="h5-echarts-kchart.png"
+  width="670" height="225" layout="responsive"></amp-img>
 </div>
 在移动端同时使用Echarts的tooltip和datazoom时，你会发现tooltip显示的时候很难去对图表进行放大、缩小、水平移动，也就是比较难触发datazoom事件，用户体验有点差。因此，本文提出了一些优化方法，以便提高用户体验。
-
+<!--more-->
 ## 1. 交互套路
 既然要优化，那就需要将tooltip和datazoom这两个事件拆分开，不能让它们同时触发。所以，交互的总方针是：
 1. tooltip隐藏时，即允许datazoom也允许显示tooltip；
