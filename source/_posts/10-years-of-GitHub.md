@@ -3,9 +3,9 @@ title: 10-years-of-GitHub
 date: 2018-05-18 10:42:25
 tags: GitHub
 ---
-> 回顾往昔十载，我们记住的不是某一个软件，而是人们用来做了什么。
-
 上个月，也就是2018年4月10日是GitHub十周年，GitHub创始人Chris Wanstrath发布了一篇文章来总结这十年的发展。
+<!-- more -->
+>回顾往昔十载，我们记住的不是某一个软件，而是人们用来做了什么。
 
 （以下内容为译文）
 Chris Wanstrath：

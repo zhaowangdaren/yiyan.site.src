@@ -1,3 +1,15 @@
 menu:
     HOME: /
     Archives: /archives
+
+# Customize
+customize:
+    logo:
+        width: 165
+        height: 60
+        url: /yiyan.site.png
+    theme_color: '#006bde'
+    highlight: androidstudio
+    sidebar: left # sidebar position, options: left, right
+    thumbnail: true # enable posts thumbnail, options: true, false
+    favicon: # path to favicon
