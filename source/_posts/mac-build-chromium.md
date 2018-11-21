@@ -105,9 +105,9 @@ or
 ```sh
 ninja -C out/Debug-iphonesimulator All
 ```
-运行测试app:
+运行测试app（机型是iPhone 6,系统iOS 12.1）:
 ```sh
-./iossim -d "iPhone 6" -s 9.3 ./base_unittests.app
+out/Debug-iphonesimulator/iossim -d "iPhone 6" -s 12.1 out/Debug-iphonesimulator/Chromium.app
 ```
 #### 单个模块
 ```sh
