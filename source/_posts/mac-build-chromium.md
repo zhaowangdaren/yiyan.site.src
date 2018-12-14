@@ -109,6 +109,10 @@ ninja -C out/Debug-iphonesimulator All
 ```sh
 out/Debug-iphonesimulator/iossim -d "iPhone 6" -s 12.1 out/Debug-iphonesimulator/Chromium.app
 ```
+成功
+<div style="text-align: center;">
+  <img src="ios.png"/>
+</div>
 #### 单个模块
 ```sh
 ninja -C out/Debug-iphonesimulator net

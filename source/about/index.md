@@ -3,8 +3,13 @@ title: 关于
 date: 2018-09-08 12:18:25
 ---
 
-### 扫码关注仪炎开发公众号
+### 支付宝扫码领取红包
+<div style="text-align: center;flex: 1;">
+  <img src="about/index/1544751367375.jpg"/>
+</div>
 
-<div style="text-align: center;">
+### 扫码关注公众号:程序员的脑洞
+
+<div style="text-align: center;flex: 1;">
   <img src="about/index/qrcode.jpg"/>
 </div>
