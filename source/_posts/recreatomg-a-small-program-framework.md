@@ -390,3 +390,8 @@ void loadBussiness () {
 不不，浏览器远比这复杂，并且js不能直接操作dom（~~也可以定义接口来实现~~），还有很多内容需要完善，例如实现js的window函数：setTimeout等。
 
 至于性能方面，是不是比直接使用webview的性能要好，这还要进一步完善丰富原型和DEMO。
+
+其实在官方的文档中已经阐述了实现原理：
+<div style="text-align:center;">
+  <img src="wechat_logic.png"/>
+</div>
