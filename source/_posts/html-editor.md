@@ -90,11 +90,13 @@ tags:
 </div>
 
 根据自动换行，如果没占满一行，则要向下一行借，补足一行。而两个div之间，则不存在前一行向下一行借的情况。
-所以，我们可以将div视为一个段落，段落每行自动占满一行。那么每一段又氛围很多行。
+所以，我们可以将div视为一个段落，段落每行自动占满一行。那么每一段又分为很多行。
+段分为两种类型：图文混排的**rich**和独占一段的**block**
 
 ```json
 // 段
 {
+  "type": "rich",
   "lines": [
     { // line
       "inlines": [
@@ -138,6 +140,12 @@ tags:
 <div class="paragraph"></div>
 ```
 
+直观的效果便是：
+
+<div style="text-align: center;">
+  <img src="ui-struct.jpg">
+</div>
+
 ### 数据结构：光标
 
 定义好数据结构，意味着如何计算光标位置也有了方向。光标的位置采用`postion: absolute;`来定位，所以富文本编辑器DOM应该是`postion: releative;`
@@ -161,7 +169,7 @@ tags:
 ]
 ```
 
-那么，我们想定位到第一行行末，那么光标的left值则是**富文本编辑器**的宽度，也就是`<span>富文本编辑器</span>`宽度。而top值则只需要在渲染出来的DOM中，找到第一段第一行的`offsetTop`。所以，如果是要将光标定位到**富文本**后，则top值不变，left值为**富文本**的宽度。
+那么，我们想定位到第一行行末，那么光标的left值则是**富文本编辑器**的宽度，也就是`<span>富文本编辑器</span>`宽度，光标的高度也可以得到。而top值则只需要在渲染出来的DOM中，找到第一段第一行的`offsetTop`。所以，如果是要将光标定位到**富文本**后，则top值不变，left值为**富文本**的宽度。
 
 我们要总结一下光标所具有的属性：段、行，以及行内位置，行内位置则需要记录所在行内文本的字符在第几个字符后面。所以基本属性为
 
@@ -180,5 +188,90 @@ cursor = {
 }
 ```
 
-这帮助我们确认了光标的位置，在数据结构中的位置，以便进行内容的增、删操作。
+这帮助我们确认了光标的位置，在内容中的位置，以便进行内容的增、删操作。
 
+突然想到我们可以看看vscode的源码，看它是如何利用electron来实现换行、光标定位。我们虽然分析过ace.js，但是其对代码是不自动换行的，虽然vscode也是如此，但是对markdown却是自动换行的。
+
+## 层次结构
+
+我们需要将编辑的内容、光标、隐藏的textarea等渲染出来。另外还需要计算字符宽度来计算光标位置。所以，我们需要将编辑区域分为以下几层：
+
+```html
+<div class="content">渲染内容层</div>
+<div class="cursor">光标层</div>
+<textarea>隐藏的输入层</textarea>
+<div class="measure">计算层</div>
+```
+
+- 渲染内容层：如名
+- 光标层：显示光标
+- 隐藏的输入层：获取用户输入
+- 计算层：计算字符宽度，行高等。
+
+## 逻辑
+
+逻辑涉及到：渲染、输入、点击
+
+### 渲染内容
+
+渲染内容上文有提到，只要每一行的内容不超过一行的行宽，渲染出来的结构基本如上。而保证每一行的行高，则需要计算每一行的内容，在后面获取用户输入会提到。
+
+### 获取用户输入
+
+获取用户输入，需要监听两种事件：input、keydown，处理四种基本状态：insertText、compositionend、Backspace、Enter
+
+#### 事件：input
+
+input需要监听的基本事件：insertText、compositionend。两者都是插入字符，compositionend则是连续输入的结束状态，例如拼音输入。
+
+在光标位置插入字符，并将聚焦的inline右侧的inlines和后续行均进行后移，也就是重新分行，这是整个编辑器的核心，删除、换行、插入都是基于此流程来实现。具体流程为：
+
+<div style="text-align: center;">
+  <img src="insert-str-program.png">
+</div>
+
+#### 事件：keydown
+
+键盘按键事件，移动端最基本的是需要处理两种key：Backspce、Enter
+
+##### Backspace:删除
+
+删除需要将cursor前的字符或者内容删除，同时将聚焦的inline右侧的inlines和后续行均进行缩进
+
+<div style="text-align: center;">
+  <img src="ui-del.jpg">
+</div>
+
+删除字符需要注意的是：字符长度不一定为1，一些表意文字，例如输入法的表情😄，其字符长度是2。所以需要用正则匹配光标前的字符。
+
+##### Enter:换行
+
+换行是将光标后的内容插入到新段中。
+
+### 点击
+
+鼠标的点击分为两种：聚焦和删除（点击了删除图标）
+
+#### 聚焦
+
+在渲染内容时将paragraph、line、inline的信息都记录到dom中
+
+```html
+<div class="paragraph" data-paragraph="0">
+  <div class="line" data-paragraph="0" data-line="0">
+    <span class="inline_text" data-paragraph="0" data-line="0" data-inline="0">文本</span><img class="inline_img" data-paragraph="0" data-line="0" data-inline="1"/>
+  </div>
+  <div class="line" data-paragraph="0" data-line="1">...</div>
+</div>
+<div class="paragraph" data-paragraph="1"></div>
+```
+
+通过点击的target，获取聚焦的inline，通过点击的offsetY确定光标top位置，offsetX（相对target的偏移）计算出光标left位置。left计算方法，则是依次将inline左侧的字符取出，得到字符宽度与offsetX进行比较。
+
+#### 删除
+
+鼠标点击的删除，主要是针对段type="block"。删除则是删除整段，更新DOM。
+
+## 总结
+
+比较简单的富文本还是建议使用contenteditable=true来实现。如果在移动端，则建议不要采用富文本的思想，而是文本与图片分离的数据结构。
